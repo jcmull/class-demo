@@ -1,0 +1,219 @@
+LINUX CHALLENGE – Includes Modules 3, 4, 5, & 6
+1. Navigatetothehomedirectory.
+cd
+
+2. Searchwhatdirectoryyou’reworkingin.
+pwd
+
+3. Listallthehiddenfilesinahumanlyreadableway,andinalong-detailedformat
+ls -ahl
+
+4. NavigatetoDocumentsdirectoryandcreate12(1-12)filesusingthisnaming
+convention: file# and give them three different extensions (Three files per
+extension)
+(I used three extensions, four files per extension to make 12.)
+cd Documents
+touch file1.txt file2.txt file3.txt file4.txt file5.sh file6.sh file7.sh file8.sh file9.tar file10.tar file11.tar file12.tar
+
+5. Openoneofthefilesusingacommandandwritesomecontentinit(morethan
+20 lines). 
+nano file1.txt
+
+6. Now,oncethecontenthasbeenwritten,useacommandtocontentthatdoesnot
+fit on one screen, print only 15 lines, and start reading on line 13
+tail -n+13 file1.txt | head -15
+
+7. Displaythefirst6lines
+head -6 file1.txt
+
+8. Displaythelast9lines
+tail -9 file1.txt
+
+9. CopythisfileyouwrotecontentinintheDesktopdirectory
+cp file1.txt ../Desktop/
+
+10.Navigate to the Desktop directory
+cd ../Desktop/
+
+11. Create a directory in Desktop and name it myFolder
+mkdir myFolder
+
+12.Inside myFolder, create a file
+touch myFolder/newfile.txt
+
+13.Inside myFolder, create another directory named myFolder1
+cd myFolder
+mkdir myFolder1
+
+14.Now, remove myFolder
+rm -r myFolder/
+
+15.Go back to the Documents directory and move one of the files to the Desktop 
+cd ../Documents
+mv file2.txt ../Desktop
+
+16.And once it’s there, re-name it
+mv ../Desktop/file2.txt ../Desktop/newfile.txt
+
+17.Show an absolute path
+/home/jmuller/Desktop/testfolder
+
+18.Show a relative path
+cat ../../Desktop/test.txt
+
+19.Wherever you want, create a folder that contains more than 3 words, using the
+three different ways to create one-than-word folders
+mkdir "one two three"
+mkdir one\ two\ three/
+mkdir one_two_three (? Not sure on this one.)
+
+20.Using a redirector, create a file that contains a command output
+echo $((3 + 2)) >> math_file.txt
+
+21.Using a wildcard, in the Documents directory print files 1-4
+echo file[1-4].txt
+
+22.Using a wildcard, delete all files with a specific extension in the Documents directory
+rm *.tar
+
+23.Create other files with names starting with s
+touch speed.txt soup.txt sound.txt
+
+24.Print all files starting with s
+echo s*
+
+25.Create three variables and store in each the output of a command. Print the value of the variable
+#!/bin/bash
+
+user=$(who)
+echo $user
+
+read -p "Enter the first number to add: " a
+read -p "Enter the second number to add: " b
+addition=$((a + b))
+echo $addition
+
+current_time=$(date)
+echo $current_time
+
+26.Run four commands in one line
+cd ../Documents/; cd ../Desktop/; cat file1.txt | grep 2.; touch "new test file".txt
+
+27.Open one of the files in the Documents directory and write 5 sentences
+containing the word “table”
+nano file3.txt
+I went to the table.
+We sit at the table.
+I brought a table home from the store.
+That's a nice table.
+Our table is made from wood.
+
+28.Using a command to search for patterns, find all the occurrences of the patter “bl” 
+cat file3.txt | grep bl
+
+29.Considering the sentence “I am happy with what I have”, change the word happy for sad
+echo "I am happy with what I have." | sed 's/happy/sad/'
+
+30.In the file with the 5 sentences, print elements 1 and 3 of each line 
+cat file3.txt | cut -d " " -f1,3
+
+31.Using pipe, print how many liclenes the file in item 30 has.
+cat file3.txt | wc -l
+
+32.Write a file with 10 lines, all in Uppercase, then change all uppercase to lowercase and print the result
+tr [A-Z] [a-z] < case.txt
+
+33.Using a redirector, append some lines to file in item 30 
+echo "I love tables." >> file3.txt
+echo "Who doesn't love a good table?" >> file3.txt
+
+34.Now, let’s add three users
+sudo useradd Tim
+sudo useradd Charles
+sudo useradd Benito
+
+35.Create a user with a comment, an account expiration 
+sudo useradd Smitty -c "welcome Smitty" -e 2021-09-12
+
+36.Cat the file where the user’s info is
+tail -1 /etc/passwd
+
+37.Create another user, this time don’t write a comment 
+sudo useradd NewGuy
+
+38.Now, modify the user and add a comment
+sudo usermod NewGuy -c "this guy seems OK"
+
+39.Also add an expiration date
+sudo usermod NewGuy -e 2021-09-25
+
+40.Delete two of the users
+sudo userdel Tim
+sudo userdel Charles
+
+41.One of the customers has gone on vacation, now lock his/her 
+account until he/she comes back.
+sudo passwd Benito -l
+
+42.Unlock the account now that user is back 
+sudo passwd Benito -u
+
+43.Set a password for two of the users 
+sudo passwd Benito
+sudo passwd Smitty
+
+44.Print the info of user’s password
+cd /etc
+sudo cat shadow
+
+45.Print all the groups
+cat /etc/group
+
+46.Create three groups
+sudo groupadd Sales
+sudo groupadd Marketing
+sudo groupadd Service
+
+47.Delete one of the groups
+sudo groupdel Sales
+
+48.Add a user to a group without removing the user from other groups 
+sudo usermod -a -G Marketing Benito
+
+49.Switch to root with current user’s environment
+sudo -s
+
+50.Switch to root with root’s environment
+sudo -i
+
+51.Print all the sudoers
+getent group sudo 
+
+52.Print your delegated sudo privileges
+sudo -l 
+
+53.Print the sudo logs
+grep sudo /var/log/auth.log
+
+54.In the Desktop directory, create 5 files
+touch newfile newfile2 newfile3 newfile4 newfile5
+
+55.File 1: give permissions to write and read for group
+chmod 664 newfile newfile2 newfile3 newfile4 newfile5
+(Write and read permissions for user and group are enabled by default?)
+
+56.File 2: give permission to read only for the user
+chmod 464 newfile newfile2 newfile3 newfile4 newfile5
+
+57.File 3: give all permissions to the others
+chmod 467 newfile newfile2 newfile3 newfile4 newfile5
+
+58.File 4: give permission to read and execute all
+chmod 555 newfile newfile2 newfile3 newfile4 newfile5
+
+59.File 5: give permission to execute only for the user
+chmod 155 newfile newfile2 newfile3 newfile4 newfile5
+
+60.Change the ownership of files 1 and 4
+sudo chown Smitty newfile
+sudo chown Benito newfile4
