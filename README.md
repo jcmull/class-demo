@@ -1,2 +1,1 @@
-# class-demo
-AWS re/Start class demo projects.
+# AWS re/Start class demo projects.
